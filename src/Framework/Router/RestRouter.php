@@ -36,7 +36,15 @@ class RestRouter
         $resourceName = $this->controllerNamespace . array_shift($resourceElements);
         $resourceId = array_shift($matches['id']);
 
-        $route = new RestRoute($resourceName, $resourceId, []);
+        $nestedResources = [];
+        foreach ($resourceElements as $key => $value) {
+            $nestedResources[] = [
+                'resource' => $value,
+                'id' => isset($matches['id'][$key]) ? $matches['id'][$key] : null,
+            ];
+        }
+
+        $route = new RestRoute($resourceName, $resourceId, $nestedResources);
 
         return $route;
     }
