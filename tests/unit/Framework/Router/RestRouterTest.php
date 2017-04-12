@@ -1,6 +1,6 @@
 <?php
 
-class RpcRouterTest extends \PHPUnit\Framework\TestCase
+class RestRouterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \Framework\Router\RestRouter

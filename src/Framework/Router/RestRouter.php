@@ -2,7 +2,9 @@
 
 namespace Framework\Router;
 
-class RestRouter
+use Framework\Router;
+
+class RestRouter implements Router
 {
     protected $controllerNamespace = 'Framework\\Controller\\';
 

@@ -2,7 +2,9 @@
 
 namespace Framework\Router;
 
-class RestRoute
+use Framework\Route;
+
+class RestRoute implements Route
 {
     protected $resourceName;
 
@@ -46,4 +48,11 @@ class RestRoute
         return $this->nestedResources;
     }
 
+    /**
+     * @return string
+     */
+    public function getControllerName()
+    {
+        return $this->getResourceName();
+    }
 }
