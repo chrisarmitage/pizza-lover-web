@@ -7,21 +7,33 @@ use Symfony\Component\HttpFoundation\Response;
 
 class App
 {
-    protected $controllerNamespace = 'Framework\\Controller\\';
+    protected $router;
+
+    /**
+     * @param $router
+     */
+    public function __construct(Router $router)
+    {
+        $this->router = $router;
+    }
 
     public function processRequest(Request $request)
     {
-        $controllerName = $this->getControllerForUrl($request->getPathInfo());
+        $route = $this->router->getRouteForUrl($request->getPathInfo());
+
+        if (!method_exists($route->getControllerName(), 'dispatch')) {
+            throw new \Exception("Could not find controller: {$route->getControllerName()}");
+        }
 
         /** @var Controller $controller */
-        $controller = new $controllerName;
+        //$controller = new $controllerName;
 
-        $controllerResponse = $controller->dispatch();
+        //$controllerResponse = $controller->dispatch();
 
         $response = new Response(
             "[Route: {$request->getPathInfo()}]"
-                . "[Controller: {$controllerName}]"
-                . "[Response: {$controllerResponse}]",
+                . "[Controller: {$route->getControllerName()}]"
+                . "[Response: { $ controllerResponse}]",
             Response::HTTP_OK,
             [
                 'content-type' => 'text/html',
@@ -33,35 +45,4 @@ class App
         return $response;
     }
 
-    protected function getControllerForUrl($url)
-    {
-        $url = parse_url($url);
-
-        preg_match_all("#/(?<controller>[\w\-]+)#", $url['path'], $matches);
-
-        $controllerElements = array_map(
-            function($url) {
-                return str_replace(
-                    ' ',
-                    '',
-                    ucwords(
-                        str_replace(
-                            '-',
-                            ' ',
-                            strtolower($url)
-                        )
-                    )
-                );
-            },
-            $matches['controller']
-        );
-
-        $controllerName = $this->controllerNamespace . implode('\\', $controllerElements);
-
-        if (!method_exists($controllerName, 'dispatch')) {
-            throw new \Exception("Could not find controller: {$controllerName}");
-        }
-
-        return $controllerName;
-    }
 }
