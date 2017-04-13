@@ -1,13 +1,15 @@
 <?php
 
-
 namespace Framework\Controller\Resource;
 
+use Framework\Repository\User;
 
 class Read
 {
-    public function dispatch()
+    public function dispatch($resourceId, $nestedResources = [])
     {
-        return __CLASS__;
+        $repository = new User();
+
+        return $repository->get($resourceId);
     }
 }
