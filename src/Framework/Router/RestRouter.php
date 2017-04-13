@@ -43,9 +43,11 @@ class RestRouter implements Router
             $matches['resource']
         );
 
-        $resourceName = $this->controllerNamespace . array_shift($resourceElements);
+        $resourceName = $this->controllerNamespace . array_pop($resourceElements);
         $controllerType = $this->methodActions[$method];
-        $resourceId = array_shift($matches['id']);
+        $resourceId = (count($matches['resource']) === count($matches['id']))
+            ? array_pop($matches['id'])
+            : null;
 
         if ($controllerType === 'Index' && $resourceId !== '') {
             $controllerType = 'Read';
@@ -54,10 +56,7 @@ class RestRouter implements Router
 
         $nestedResources = [];
         foreach ($resourceElements as $key => $value) {
-            $nestedResources[] = [
-                'resource' => $value,
-                'id' => isset($matches['id'][$key]) ? $matches['id'][$key] : null,
-            ];
+            $nestedResources[$value] = $matches['id'][$key];
         }
 
         $route = new RestRoute($controllerName, $resourceId, $nestedResources);
