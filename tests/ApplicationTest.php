@@ -9,11 +9,11 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
     public function testReturnsResponse()
     {
         $request = Request::create(
-            '/hello-world',
+            '/resource',
             'GET'
         );
 
-        $app = new App(new \Framework\Router\RpcRouter());
+        $app = new App(new \Framework\Router\RestRouter());
 
         $response = $app->processRequest($request);
 

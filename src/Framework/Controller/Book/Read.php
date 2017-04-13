@@ -2,14 +2,16 @@
 
 namespace Framework\Controller\Book;
 
+use Framework\Controller;
 use Framework\Repository\Book;
+use Framework\Router\RestRoute;
 
-class Read
+class Read implements Controller
 {
-    public function dispatch($resourceId, $nestedResources = [])
+    public function dispatch(RestRoute $route)
     {
         $repository = new Book();
 
-        return $repository->get($nestedResources['Resource'], $resourceId);
+        return $repository->get($route->getNestedResources()['Resource'], $route->getResourceId());
     }
 }

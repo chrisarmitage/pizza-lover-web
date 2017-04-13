@@ -2,7 +2,13 @@
 
 namespace Framework;
 
+use Framework\Router\RestRoute;
+
 interface Controller
 {
-    public function dispatch();
+    /**
+     * @param RestRoute $route
+     * @return mixed
+     */
+    public function dispatch(RestRoute $route);
 }

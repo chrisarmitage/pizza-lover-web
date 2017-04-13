@@ -2,14 +2,16 @@
 
 namespace Framework\Controller\Resource;
 
+use Framework\Controller;
 use Framework\Repository\User;
+use Framework\Router\RestRoute;
 
-class Read
+class Read implements Controller
 {
-    public function dispatch($resourceId, $nestedResources = [])
+    public function dispatch(RestRoute $route)
     {
         $repository = new User();
 
-        return $repository->get($resourceId);
+        return $repository->get($route->getResourceId());
     }
 }
