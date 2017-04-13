@@ -8,11 +8,19 @@ class RestRouter implements Router
 {
     protected $controllerNamespace = 'Framework\\Controller\\';
 
+    protected $methodActions = [
+        'GET' => 'Index',
+        'POST' => 'Create',
+        'PUT' => 'Update',
+        'DELETE' => 'Delete',
+    ];
+
     /**
-     * @param $url
+     * @param string $url
+     * @param string $method
      * @return RestRoute
      */
-    public function getRouteForUrl($url)
+    public function getRouteForUrl($url, $method = 'GET')
     {
         $url = parse_url($url);
 
@@ -36,7 +44,13 @@ class RestRouter implements Router
         );
 
         $resourceName = $this->controllerNamespace . array_shift($resourceElements);
+        $controllerType = $this->methodActions[$method];
         $resourceId = array_shift($matches['id']);
+
+        if ($controllerType === 'Index' && $resourceId !== '') {
+            $controllerType = 'Read';
+        }
+        $controllerName = $resourceName . '\\' . $controllerType;
 
         $nestedResources = [];
         foreach ($resourceElements as $key => $value) {
@@ -46,7 +60,7 @@ class RestRouter implements Router
             ];
         }
 
-        $route = new RestRoute($resourceName, $resourceId, $nestedResources);
+        $route = new RestRoute($controllerName, $resourceId, $nestedResources);
 
         return $route;
     }

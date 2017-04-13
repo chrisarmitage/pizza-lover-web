@@ -21,19 +21,17 @@ class App
     {
         $route = $this->router->getRouteForUrl($request->getPathInfo());
 
-        if (!method_exists($route->getControllerName(), 'dispatch')) {
-            throw new \Exception("Could not find controller: {$route->getControllerName()}");
-        }
 
-        /** @var Controller $controller */
-        //$controller = new $controllerName;
 
-        //$controllerResponse = $controller->dispatch();
+        $controller = (new ControllerResolver())->resolve($route->getControllerName());
+
+        $controllerResponse = $controller->dispatch();
 
         $response = new Response(
-            "[Route: {$request->getPathInfo()}]"
-                . "[Controller: {$route->getControllerName()}]"
-                . "[Response: { $ controllerResponse}]",
+            "[Route: {$request->getPathInfo()}]<br />"
+                . "[Method: {$request->getMethod()}]<br />"
+                . "[Controller: {$route->getControllerName()}]<br />"
+                . "[Response: {$controllerResponse}]",
             Response::HTTP_OK,
             [
                 'content-type' => 'text/html',

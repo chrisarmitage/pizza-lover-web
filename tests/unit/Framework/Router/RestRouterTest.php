@@ -16,7 +16,7 @@ class RestRouterTest extends \PHPUnit\Framework\TestCase
     {
         $controllerName = $this->router->getRouteForUrl('/resource');
 
-        self::assertEquals('Framework\\Controller\\Resource', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\Resource\\Index', $controllerName->getControllerName());
         self::assertEquals(null, $controllerName->getResourceId());
     }
 
@@ -24,7 +24,7 @@ class RestRouterTest extends \PHPUnit\Framework\TestCase
     {
         $controllerName = $this->router->getRouteForUrl('/resource/1');
 
-        self::assertEquals('Framework\\Controller\\Resource', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\Resource\\Read', $controllerName->getControllerName());
         self::assertEquals('1', $controllerName->getResourceId());
     }
 
@@ -32,7 +32,7 @@ class RestRouterTest extends \PHPUnit\Framework\TestCase
     {
         $controllerName = $this->router->getRouteForUrl('/RESOURCE');
 
-        self::assertEquals('Framework\\Controller\\Resource', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\Resource\\Index', $controllerName->getControllerName());
         self::assertEquals(null, $controllerName->getResourceId());
     }
 
@@ -40,7 +40,7 @@ class RestRouterTest extends \PHPUnit\Framework\TestCase
     {
         $controllerName = $this->router->getRouteForUrl('/RESOURCE/ID');
 
-        self::assertEquals('Framework\\Controller\\Resource', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\Resource\\Read', $controllerName->getControllerName());
         self::assertEquals('ID', $controllerName->getResourceId());
     }
 
@@ -48,14 +48,14 @@ class RestRouterTest extends \PHPUnit\Framework\TestCase
     {
         $controllerName = $this->router->getRouteForUrl('/resource-name');
 
-        self::assertEquals('Framework\\Controller\\ResourceName', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\ResourceName\\Index', $controllerName->getControllerName());
     }
 
     public function testPreservesResourceIdDashes()
     {
         $controllerName = $this->router->getRouteForUrl('/resource-id/dash-id');
 
-        self::assertEquals('Framework\\Controller\\ResourceId', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\ResourceId\\Read', $controllerName->getControllerName());
         self::assertEquals('dash-id', $controllerName->getResourceId());
     }
 
@@ -63,7 +63,7 @@ class RestRouterTest extends \PHPUnit\Framework\TestCase
     {
         $controllerName = $this->router->getRouteForUrl('/resource/1/sub-resource');
 
-        self::assertEquals('Framework\\Controller\\Resource', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\Resource\\Read', $controllerName->getControllerName());
         self::assertEquals('1', $controllerName->getResourceId());
         self::assertCount(1, $controllerName->getNestedResources());
         self::assertEquals(
@@ -79,7 +79,7 @@ class RestRouterTest extends \PHPUnit\Framework\TestCase
     {
         $controllerName = $this->router->getRouteForUrl('/resource/1/sub-resource/2');
 
-        self::assertEquals('Framework\\Controller\\Resource', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\Resource\\Read', $controllerName->getControllerName());
         self::assertEquals('1', $controllerName->getResourceId());
         self::assertCount(1, $controllerName->getNestedResources());
         self::assertEquals(
@@ -95,7 +95,7 @@ class RestRouterTest extends \PHPUnit\Framework\TestCase
     {
         $controllerName = $this->router->getRouteForUrl('/resource/1/sub-resource/2/sub-sub-resource');
 
-        self::assertEquals('Framework\\Controller\\Resource', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\Resource\\Read', $controllerName->getControllerName());
         self::assertEquals('1', $controllerName->getResourceId());
         self::assertCount(2, $controllerName->getNestedResources());
         self::assertEquals(
@@ -118,7 +118,7 @@ class RestRouterTest extends \PHPUnit\Framework\TestCase
     {
         $controllerName = $this->router->getRouteForUrl('/resource/1/sub-resource/2/sub-sub-resource/3');
 
-        self::assertEquals('Framework\\Controller\\Resource', $controllerName->getResourceName());
+        self::assertEquals('Framework\\Controller\\Resource\\Read', $controllerName->getControllerName());
         self::assertEquals('1', $controllerName->getResourceId());
         self::assertCount(2, $controllerName->getNestedResources());
         self::assertEquals(

@@ -6,20 +6,20 @@ use Framework\Route;
 
 class RestRoute implements Route
 {
-    protected $resourceName;
+    protected $controllerName;
 
     protected $resourceId;
 
     protected $nestedResources = [];
 
     /**
-     * @param       $resourceName
+     * @param       $controllerName
      * @param       $resourceId
      * @param array $nestedResources
      */
-    public function __construct($resourceName, $resourceId, array $nestedResources)
+    public function __construct($controllerName, $resourceId, array $nestedResources)
     {
-        $this->resourceName = $resourceName;
+        $this->controllerName = $controllerName;
         $this->resourceId = $resourceId;
         $this->nestedResources = $nestedResources;
     }
@@ -27,9 +27,9 @@ class RestRoute implements Route
     /**
      * @return mixed
      */
-    public function getResourceName()
+    public function getControllerName()
     {
-        return $this->resourceName;
+        return $this->controllerName;
     }
 
     /**
@@ -48,11 +48,4 @@ class RestRoute implements Route
         return $this->nestedResources;
     }
 
-    /**
-     * @return string
-     */
-    public function getControllerName()
-    {
-        return $this->getResourceName();
-    }
 }
