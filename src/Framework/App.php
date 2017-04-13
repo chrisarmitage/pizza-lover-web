@@ -21,20 +21,15 @@ class App
     {
         $route = $this->router->getRouteForUrl($request->getPathInfo());
 
-
-
         $controller = (new ControllerResolver())->resolve($route->getControllerName());
 
-        $controllerResponse = $controller->dispatch();
+        $controllerResponse = $controller->dispatch($route);
 
         $response = new Response(
-            "[Route: {$request->getPathInfo()}]<br />"
-                . "[Method: {$request->getMethod()}]<br />"
-                . "[Controller: {$route->getControllerName()}]<br />"
-                . "[Response: {$controllerResponse}]",
+            json_encode($controllerResponse),
             Response::HTTP_OK,
             [
-                'content-type' => 'text/html',
+                'content-type' => 'application/json',
             ]
         );
 
