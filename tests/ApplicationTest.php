@@ -1,11 +1,26 @@
 <?php
 
 use Framework\App;
+use Framework\Router\RestRouter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApplicationTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var App
+     */
+    protected $app;
+
+    public function setUp() {
+        $container = new \Auryn\Injector();
+
+        $container->share($container);
+        $container->alias(\Framework\Router::class, RestRouter::class);
+
+        $this->app = $container->make(App::class);
+    }
+
     public function testReturnsResponse()
     {
         $request = Request::create(
@@ -13,9 +28,7 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
             'GET'
         );
 
-        $app = new App(new \Framework\Router\RestRouter());
-
-        $response = $app->processRequest($request);
+        $response = $this->app->processRequest($request);
 
         self::assertInstanceOf(Response::class, $response);
         //self::assertContains('[Route: /hello-world]', $response->getContent());
