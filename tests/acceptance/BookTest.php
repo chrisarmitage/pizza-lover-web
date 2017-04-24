@@ -24,7 +24,7 @@ class BookTest extends \PHPUnit\Framework\TestCase
     public function testReturnsBookIndex()
     {
         $request = Request::create(
-            '/resource/ca/book',
+            '/person/ca/book',
             'GET'
         );
 
@@ -50,7 +50,7 @@ class BookTest extends \PHPUnit\Framework\TestCase
     public function testReturnsBook()
     {
         $request = Request::create(
-            '/resource/ca/book/botw',
+            '/person/ca/book/botw',
             'GET'
         );
 

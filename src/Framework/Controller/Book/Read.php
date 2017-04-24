@@ -25,6 +25,6 @@ class Read implements Controller
     {
         $repository = new Book();
 
-        return $repository->get($this->route->getNestedResources()['Resource'], $this->route->getResourceId());
+        return $repository->get($this->route->getNestedResources()['Person'], $this->route->getResourceId());
     }
 }

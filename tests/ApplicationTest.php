@@ -24,7 +24,7 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
     public function testReturnsResponse()
     {
         $request = Request::create(
-            '/resource',
+            '/person',
             'GET'
         );
 

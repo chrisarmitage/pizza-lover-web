@@ -25,6 +25,6 @@ class Index implements Controller
     {
         $repository = new Book();
 
-        return $repository->getAll($this->route->getNestedResources()['Resource']);
+        return $repository->getAll($this->route->getNestedResources()['Person']);
     }
 }

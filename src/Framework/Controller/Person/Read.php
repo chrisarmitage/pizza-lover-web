@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Controller\Resource;
+namespace Framework\Controller\Person;
 
 use Framework\Controller;
 use Framework\Repository\User;
