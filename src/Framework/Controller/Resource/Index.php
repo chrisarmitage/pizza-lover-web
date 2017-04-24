@@ -4,11 +4,10 @@ namespace Framework\Controller\Resource;
 
 use Framework\Controller;
 use Framework\Repository\User;
-use Framework\Router\RestRoute;
 
 class Index implements Controller
 {
-    public function dispatch(RestRoute $route)
+    public function dispatch()
     {
         $repository = new User();
 

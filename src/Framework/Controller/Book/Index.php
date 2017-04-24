@@ -8,10 +8,23 @@ use Framework\Router\RestRoute;
 
 class Index implements Controller
 {
-    public function dispatch(RestRoute $route)
+    /**
+     * @var RestRoute
+     */
+    protected $route;
+
+    /**
+     * @param RestRoute $route
+     */
+    public function __construct(RestRoute $route)
+    {
+        $this->route = $route;
+    }
+
+    public function dispatch()
     {
         $repository = new Book();
 
-        return $repository->getAll($route->getNestedResources()['Resource']);
+        return $repository->getAll($this->route->getNestedResources()['Resource']);
     }
 }

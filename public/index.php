@@ -9,7 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 $request = Request::createFromGlobals();
 
-$app = new App(new RestRouter());
+$container = new \Auryn\Injector();
+
+$container->share($container);
+
+$container->alias(\Framework\Router::class, RestRouter::class);
+
+$app = $container->make(App::class);
 
 $response = $app->processRequest($request);
 

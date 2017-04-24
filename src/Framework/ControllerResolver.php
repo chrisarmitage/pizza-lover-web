@@ -2,8 +2,23 @@
 
 namespace Framework;
 
+use Auryn\Injector;
+
 class ControllerResolver
 {
+    /**
+     * @var Injector
+     */
+    protected $container;
+
+    /**
+     * @param Injector $container
+     */
+    public function __construct(Injector $container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * @param string $controllerName
      * @return Controller
@@ -15,6 +30,6 @@ class ControllerResolver
             throw new \Exception("Could not find controller: {$controllerName}");
         }
 
-        return new $controllerName;
+        return $this->container->make($controllerName);
     }
 }

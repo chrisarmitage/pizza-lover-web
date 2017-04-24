@@ -2,26 +2,46 @@
 
 namespace Framework;
 
+use Auryn\Injector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class App
 {
+    /**
+     * @var Router
+     */
     protected $router;
 
     /**
-     * @param $router
+     * @var ControllerResolver
      */
-    public function __construct(Router $router)
+    protected $controllerResolver;
+
+    /**
+     * @var Injector
+     */
+    protected $container;
+
+    /**
+     * @param Router             $router
+     * @param ControllerResolver $controllerResolver
+     * @param Injector           $container
+     */
+    public function __construct(Router $router, ControllerResolver $controllerResolver, Injector $container)
     {
         $this->router = $router;
+        $this->controllerResolver = $controllerResolver;
+        $this->container = $container;
     }
 
     public function processRequest(Request $request)
     {
         $route = $this->router->getRouteForUrl($request->getPathInfo());
 
-        $controller = (new ControllerResolver())->resolve($route->getControllerName());
+        $this->container->share($route);
+
+        $controller = $this->controllerResolver->resolve($route->getControllerName());
 
         $controllerResponse = $controller->dispatch($route);
 
