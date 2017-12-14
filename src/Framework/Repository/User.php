@@ -23,6 +23,10 @@ class User
             'username' => 'cw',
             'name' => 'Charles Ward',
         ],
+        'bc' => [
+            'username' => 'bc',
+            'name' => 'Brother Cadmus',
+        ],
     ];
 
     public function getAll()
