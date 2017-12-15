@@ -30,6 +30,11 @@ class Book
             'id' => 'ca',
             'name' => 'Codex Astartes',
         ],
+        [
+            'owner' => 'bc',
+            'id' => 'lf',
+            'name' => 'Libre Fanatica',
+        ],
     ];
 
     public function getAll($owner)
