@@ -25,6 +25,11 @@ class Book
             'id' => 'botw',
             'name' => 'Book of the Worm CW',
         ],
+        [
+            'owner' => 'bc',
+            'id' => 'ca',
+            'name' => 'Codex Astartes',
+        ],
     ];
 
     public function getAll($owner)
