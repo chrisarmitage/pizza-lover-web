@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Framework\Controller\HelloWorld\Admin;
 
 use Framework\Controller;

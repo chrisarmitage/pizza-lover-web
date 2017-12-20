@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $path = __DIR__ . '/src/';
 $fqcns = array();
 
