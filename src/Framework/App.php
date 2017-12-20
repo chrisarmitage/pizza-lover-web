@@ -37,7 +37,13 @@ class App
         $this->container = $container;
     }
 
-    public function processRequest(Request $request)
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Auryn\ConfigException
+     * @throws \Exception
+     */
+    public function processRequest(Request $request) : Response
     {
         $route = $this->router->getRouteForUrl($request->getPathInfo());
 

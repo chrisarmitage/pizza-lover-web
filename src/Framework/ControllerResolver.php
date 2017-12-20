@@ -26,7 +26,7 @@ class ControllerResolver
      * @return Controller
      * @throws \Exception
      */
-    public function resolve($controllerName)
+    public function resolve($controllerName) : Controller
     {
         if (!method_exists($controllerName, 'dispatch')) {
             throw new \Exception("Could not find controller: {$controllerName}");
