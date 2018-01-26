@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Repository;
+namespace Application\Repository;
 
 class Book
 {

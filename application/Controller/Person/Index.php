@@ -1,9 +1,9 @@
 <?php
 
-namespace Framework\Controller\Person;
+namespace Application\Controller\Person;
 
+use Application\Repository\User;
 use Framework\Controller;
-use Framework\Repository\User;
 
 class Index implements Controller
 {

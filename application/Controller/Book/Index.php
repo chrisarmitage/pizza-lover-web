@@ -1,12 +1,12 @@
 <?php
 
-namespace Framework\Controller\Book;
+namespace Application\Controller\Book;
 
+use Application\Repository\Book;
 use Framework\Controller;
-use Framework\Repository\Book;
 use Framework\Router\RestRoute;
 
-class Read implements Controller
+class Index implements Controller
 {
     /**
      * @var RestRoute
@@ -25,6 +25,6 @@ class Read implements Controller
     {
         $repository = new Book();
 
-        return $repository->get($this->route->getNestedResources()['Person'], $this->route->getResourceId());
+        return $repository->getAll($this->route->getNestedResources()['Person']);
     }
 }

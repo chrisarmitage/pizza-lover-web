@@ -1,9 +1,9 @@
 <?php
 
-namespace Framework\Controller\Person;
+namespace Application\Controller\Book;
 
+use Application\Repository\Book;
 use Framework\Controller;
-use Framework\Repository\User;
 use Framework\Router\RestRoute;
 
 class Read implements Controller
@@ -23,8 +23,8 @@ class Read implements Controller
 
     public function dispatch()
     {
-        $repository = new User();
+        $repository = new Book();
 
-        return $repository->get($this->route->getResourceId());
+        return $repository->get($this->route->getNestedResources()['Person'], $this->route->getResourceId());
     }
 }
