@@ -6,7 +6,7 @@ use Framework\Router;
 
 class RestRouter implements Router
 {
-    protected $controllerNamespace = 'Framework\\Controller\\';
+    protected $controllerNamespace = 'Application\\Controller\\';
 
     protected $methodActions = [
         'GET' => 'Index',
