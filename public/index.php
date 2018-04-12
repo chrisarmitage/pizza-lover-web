@@ -15,7 +15,7 @@ $container = new \Auryn\Injector();
 
 $container->share($container);
 
-$container->alias(\Framework\Router::class, RestRouter::class);
+$container->alias(\Framework\Router::class, RpcRouter::class);
 
 $app = $container->make(App::class);
 

@@ -8,7 +8,7 @@ use Framework\Router;
 
 class RpcRouter implements Router
 {
-    protected $controllerNamespace = 'Framework\\Controller\\';
+    protected $controllerNamespace = 'Application\\Controller\\';
 
     /**
      * @param $url
@@ -19,6 +19,10 @@ class RpcRouter implements Router
         $url = parse_url($url);
 
         preg_match_all("#/(?<controller>[\w\-]+)#", $url['path'], $matches);
+
+        if (count($matches['controller']) === 0) {
+            $matches['controller'][] = 'index';
+        }
 
         $controllerElements = array_map(
             function($url) {
