@@ -48,6 +48,7 @@ class App
         $route = $this->router->getRouteForUrl($request->getPathInfo());
 
         $this->container->share($route);
+        $this->container->share($request);
 
         $controller = $this->controllerResolver->resolve($route->getControllerName());
 
