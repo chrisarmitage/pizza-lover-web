@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d3059b6648eeadb340e00d70ecbfb6c",
+    "content-hash": "b029d27a67adbbd18ab9c4dd9afdbe54",
     "packages": [
         {
             "name": "paragonie/random_compat",
@@ -430,6 +430,67 @@
                 "shim"
             ],
             "time": "2017-10-11T12:05:26+00:00"
+        },
+        {
+            "name": "tomwalder/php-gds",
+            "version": "v4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tomwalder/php-gds.git",
+                "reference": "a8f07cf95d940e8840ed5e4304fc7a69e9f0bc1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tomwalder/php-gds/zipball/a8f07cf95d940e8840ed5e4304fc7a69e9f0bc1e",
+                "reference": "a8f07cf95d940e8840ed5e4304fc7a69e9f0bc1e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "google/appengine-php-sdk": ">=1.9.22",
+                "google/auth": "v1.0.*",
+                "phpunit/phpunit": "~4.8",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "suggest": {
+                "google/auth": "If you need to use the REST API (i.e. not on AppEngine Standard) Tested with v1.0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ],
+                "psr-4": {
+                    "GDS\\": "src/GDS/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "src/"
+            ],
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Tom Walder",
+                    "email": "twalder@gmail.com"
+                }
+            ],
+            "description": "Google Cloud Datastore Library for PHP",
+            "homepage": "https://github.com/tomwalder/php-gds",
+            "keywords": [
+                "appengine",
+                "cloud datastore",
+                "datastore",
+                "gae",
+                "google",
+                "nosql"
+            ],
+            "time": "2018-01-27T12:21:59+00:00"
         }
     ],
     "packages-dev": [
