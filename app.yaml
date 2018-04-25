@@ -1,0 +1,14 @@
+runtime: php72
+#application: alpha-189510
+
+handlers:
+  - url: /favicon.ico
+    static_files: public/favicon.ico
+    upload: public/favicon.ico
+
+  - url: /images
+    static_dir: public/images
+
+  - url: /.*
+    script: public/index.php
+    login: optional
