@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Controller\User;
 
+use Application\Repository\UserDatastore;
 use Framework\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,25 +16,28 @@ class LogIn implements Controller
     protected $address;
 
     /**
-     * Index constructor.
-     * @param $request
+     * @var UserDatastore
      */
-    public function __construct(Request $request)
+    protected $userDatastore;
+
+    /**
+     * @param Request       $request
+     * @param UserDatastore $userDatastore
+     */
+    public function __construct(Request $request, UserDatastore $userDatastore)
     {
         $params = $request->query->all();
         $this->mobile = $params['mobile'] ?? null;
         $this->password = $params['password'] ?? null;
+
+        $this->userDatastore = $userDatastore;
     }
 
     public function dispatch()
     {
-        $store = new \GDS\Store('User');
-        $user = $store->fetchOne(
-            "SELECT * FROM User WHERE mobile = @mobile AND password = @password",
-            [
-                'mobile'   => $this->mobile,
-                'password' => $this->password,
-            ]
+        $user = $this->userDatastore->findByMobileAndPassword(
+            $this->mobile,
+            $this->password
         );
 
         if ($user === null) {
@@ -44,9 +48,8 @@ class LogIn implements Controller
 
         return [
             'success' => true,
-            'mobile'  => $user->mobile,
-            'name'    => $user->name,
+            'mobile'  => $user->getMobile(),
+            'name'    => $user->getName(),
         ];
     }
-
 }
