@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Framework;
 
 use Auryn\Injector;
@@ -35,11 +37,18 @@ class App
         $this->container = $container;
     }
 
-    public function processRequest(Request $request)
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Auryn\ConfigException
+     * @throws \Exception
+     */
+    public function processRequest(Request $request) : Response
     {
         $route = $this->router->getRouteForUrl($request->getPathInfo());
 
         $this->container->share($route);
+        $this->container->share($request);
 
         $controller = $this->controllerResolver->resolve($route->getControllerName());
 

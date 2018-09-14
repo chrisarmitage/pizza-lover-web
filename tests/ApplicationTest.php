@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Framework\App;
 use Framework\Router\RestRouter;
 use Symfony\Component\HttpFoundation\Request;
